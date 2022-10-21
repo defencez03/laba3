@@ -1,6 +1,8 @@
 // Выполнили студенты группы 21ВВ3: Тюкалов В.Е. и Чинов Д.Д.
 // Приоритетная очередь
 #include<iostream>
+#include <string.h>
+#include <windows.h>
 
 
 struct node
@@ -29,8 +31,8 @@ struct node* get_struct(void)
 
 	puts("Введите название объекта: ");   // вводим данные
 	std::cin >> s;
-	puts("Введите приоритет: ");   
-	std::cin >> p->pri;
+	//puts("Введите приоритет: ");   
+	//std::cin >> p->pri;
 	if (*s == 0)
 	{
 		printf("Запись не была произведена\n");
@@ -84,21 +86,33 @@ struct node* priority(node* el)
 		last = el;
 		return NULL;
 	}
-	if (head->pri > el->pri)
+	if (strcmp(el->inf, head->inf) < 0)
 	{
 		el->next = head;
 		head = el;
 		return NULL;
 	}
+	/*if (head->pri > el->pri)
+	{
+		el->next = head;
+		head = el;
+		return NULL;
+	}*/
 	struct node* struc = head;
 	while (struc)
 	{
-		if (el->pri < struc->pri)
+		if (strcmp(el->inf, struc->inf) < 0)
 		{
 			el->next = struc;
 			sw->next = el;
 			return NULL;
 		}
+		/*if (el->pri < struc->pri)
+		{
+			el->next = struc;
+			sw->next = el;
+			return NULL;
+		}*/
 		sw = struc;
 		struc = struc->next;
 	}
@@ -112,7 +126,9 @@ struct node* priority(node* el)
 
 int main() 
 {
-	setlocale(LC_ALL, "RUS");
+	//setlocale(LC_ALL, "RUS");
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
 
 	int var = 0;
 

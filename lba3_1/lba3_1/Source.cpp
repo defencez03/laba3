@@ -1,6 +1,8 @@
 //Алоритмы: Очередь и Стек
 #include<iostream>
 #include<string>
+#include<conio.h>
+
 
 struct node
 {
@@ -88,21 +90,48 @@ void review(void)
 		struc = struc->next;
 	}
 	printf("\n");
-
+	_getch();
 }
 
-int main(void) 
+int Menu(void)
+{
+	int c = 0;
+
+	system("cls");
+	while ((c < '0' || c > '8') && c != 27)
+	{
+		printf("0.Выход\n"
+			"1.Добавить\n"
+			"2.Удалить из очереди\n"
+			"3.Удалить из стека\n"
+			"4.Вывести\n"
+			">");
+		c = _getch();
+		printf("%c\n", c);
+	}
+	return c;
+}
+
+int main(void)
 {
 	setlocale(LC_ALL, "rus");
 
-	push();
-	push();
-	push();
-	review();
-	pop_queue();
-	review();
-	push();
-	review();
-	pop_stack();
-	review();
+	int selection = 0;
+
+	while ((selection = Menu()) != '0' && selection != 27)
+		switch (selection)
+		{
+		case '1':
+			push();
+			break;
+		case '2':
+			pop_queue();
+			break;
+		case '3':
+			pop_stack();
+			break;
+		case '4':
+			review();
+			break;
+		}
 }
